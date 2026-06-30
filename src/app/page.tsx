@@ -155,7 +155,7 @@ function FreshnessMeter({ progress }: { progress: number }) {
 function WhatsAppCTA({ visible }: { visible: boolean }) {
   return (
     <a
-      href="https://wa.me/919999999999?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
+      href="https://wa.me/9199495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
       target="_blank"
       rel="noopener noreferrer"
       className={`whatsapp-cta flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-3 text-white shadow-lg hover:bg-[#22c35e] transition-all ${
@@ -484,20 +484,20 @@ function Contact() {
       }`}
     >
       <div className="mx-auto max-w-3xl text-center">
-        <span className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">
+        <span className="text-xs font-semibold tracking-[0.2em] text-white uppercase">
           Get In Touch
         </span>
         <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-3">
-          Let&rsquo;s Make It Fresh Again
+          Let&rsquo;s Make It <span className="text-gold">Fresh Again</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-lg text-gold/80">
+        <p className="mx-auto mt-4 max-w-lg text-white/80">
           Ready to fall in love with your space all over again? Reach out and we&rsquo;ll
           take care of the rest.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://wa.me/919999999999?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
+            href="https://wa.me/9199495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-fresh-dark hover:bg-[#e6c000] transition-all shadow-lg"
@@ -505,14 +505,14 @@ function Contact() {
             Chat on WhatsApp
           </a>
           <a
-            href="mailto:hello@vrithy.in"
-            className="rounded-full border border-gold/50 px-8 py-3.5 text-base font-semibold text-gold hover:bg-gold/10 transition-all"
+            href="tel:+919495804501"
+            className="rounded-full border border-white/50 px-8 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition-all"
           >
-            hello@vrithy.in
+            +91 94958 04501
           </a>
         </div>
 
-        <p className="mt-8 text-sm text-gold/60">
+        <p className="mt-8 text-sm text-white/70">
           Typically respond within 30 minutes &mdash; often faster.
         </p>
       </div>
