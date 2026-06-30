@@ -155,7 +155,7 @@ function FreshnessMeter({ progress }: { progress: number }) {
 function WhatsAppCTA({ visible }: { visible: boolean }) {
   return (
     <a
-      href="https://wa.me/9199495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
+      href="https://wa.me/919495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
       target="_blank"
       rel="noopener noreferrer"
       className={`whatsapp-cta flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-3 text-white shadow-lg hover:bg-[#22c35e] transition-all ${
@@ -495,7 +495,7 @@ function Contact() {
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://wa.me/9199495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
+            href="https://wa.me/919495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-fresh-dark hover:bg-[#e6c000] transition-all shadow-lg"
