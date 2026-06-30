@@ -13,57 +13,57 @@ const SERVICES = [
   {
     icon: "🏠",
     title: "Residential Cleaning",
-    desc: "Complete home cleaning tailored to your lifestyle. Every room, every surface — left spotless and refreshingly clean.",
+    desc: "Your home, fully refreshed. Every room cleaned like it matters, because it does.",
   },
   {
     icon: "🏢",
     title: "Apartment Cleaning",
-    desc: "Compact spaces cleaned with precision. We make the most of every square foot, leaving your apartment immaculate.",
+    desc: "Small spaces, big transformation. We clean every inch so your place feels like new.",
   },
   {
     icon: "🏪",
     title: "Commercial Cleaning",
-    desc: "Professional cleaning for offices, retail spaces, and workplaces. A clean environment that impresses clients and staff alike.",
+    desc: "A clean workspace your team and clients will love. Professional. Reliable. Thorough.",
   },
   {
     icon: "✦",
     title: "Specialized Services",
-    desc: "From deep cleaning to post-renovation restoration — tailored solutions for those unique cleaning challenges.",
+    desc: "Deep cleans, post renovation, move in and move out. Whatever you need, we have you covered.",
   },
   {
     icon: "💧",
     title: "Water Tank Cleaning",
-    desc: "Thorough tank cleaning and disinfection. Safe,干净 water for your home, with zero mess or disruption.",
+    desc: "Clean water starts with a clean tank. We disinfect thoroughly with zero mess.",
   },
   {
     icon: "🛋️",
     title: "Sofa Shampoo Washing",
-    desc: "Deep fabric care that removes stains, odors, and allergens. Your upholstery, revived and refreshed.",
+    desc: "Stains, dust, and odours gone. Your sofa feels as good as new again.",
   },
   {
     icon: "🧹",
     title: "Interlock Cleaning",
-    desc: "Restore the beauty of your driveways and pathways. Pressure washing and deep cleaning for interlock surfaces.",
+    desc: "Driveways and walkways restored. Pressure washing that brings the shine back.",
   },
   {
     icon: "✦",
     title: "Deep Clean Revival",
-    desc: "Every nook, every corner — we restore your home to a state of immaculate freshness. A deep clean that leaves no trace behind.",
+    desc: "A deep clean that reaches where you can't. Your home, spotless from top to bottom.",
   },
   {
     icon: "✦",
     title: "Eco-Friendly Refresh",
-    desc: "Plant-based, pet-safe products that clean deeply without compromise. Good for your home, gentle on the planet.",
+    desc: "Plant based products that clean deeply. Safe for your family, kind to the planet.",
   },
   {
     icon: "✦",
     title: "Organized & Polished",
-    desc: "Beyond clean — we bring order. Neatly arranged spaces that feel lighter, calmer, and instantly more livable.",
+    desc: "Everything in its place. We clean and organize so your space feels lighter and calmer.",
   },
   {
     icon: "✦",
     title: "Premium Finishes",
-    desc: "The details matter. From streak-free glass to perfectly made beds, we obsess over the finishing touches.",
+    desc: "The little things matter. Streak free glass, crisp corners, and beds made perfectly.",
   },
 ];
 
@@ -71,36 +71,36 @@ const PROCESS = [
   {
     step: "01",
     title: "You Reach Out",
-    desc: "Tell us what needs refreshing. A quick chat and we'll tailor a plan that fits your space and schedule.",
+    desc: "Tell us what you need. We will chat, understand your space, and tailor a plan just for you.",
   },
   {
     step: "02",
     title: "We Arrive",
-    desc: "Our team shows up fully equipped — on time, in uniform, ready to transform your space from top to bottom.",
+    desc: "Our team shows up on time, fully equipped and ready to transform your space.",
   },
   {
     step: "03",
     title: "Your Space Feels New",
-    desc: "We don't leave until every surface gleams. Breathe in that fresh feeling — your home, reborn.",
+    desc: "We don't leave until everything gleams. Take a breath and enjoy your refreshed home.",
   },
 ];
 
 const TESTIMONIALS = [
   {
     quote:
-      "Vrithy made our home feel brand new. The attention to detail was remarkable — things I'd stopped noticing are sparkling again.",
+      "Vrithy made our home feel brand new. The attention to detail was remarkable. Things I had stopped noticing are sparkling again.",
     name: "Sarah M.",
     location: "Koramangala, Bangalore",
   },
   {
     quote:
-      "The most thorough cleaning we've ever had. The eco-friendly products are a huge plus — our son has allergies and there was zero irritation.",
+      "The most thorough cleaning we have ever had. The eco-friendly products are a huge plus. Our son has allergies and there was zero irritation.",
     name: "James & Priya R.",
     location: "Indiranagar, Bangalore",
   },
   {
     quote:
-      "I booked a one-time refresh and now I'm a monthly regular. Worth every rupee. My flat has never looked better.",
+      "I booked a one time refresh and now I am a monthly regular. Worth every rupee. My flat has never looked better.",
     name: "Ananya K.",
     location: "Whitefield, Bangalore",
   },
@@ -264,7 +264,7 @@ function Hero() {
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         <span className="inline-block rounded-full bg-white/90 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold tracking-wider text-fresh shadow-lg uppercase mb-6">
-          Vrithy Solutions — Premium Home Cleaning
+          Vrithy Solutions &middot; Premium Home Cleaning
         </span>
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.3)]">
           Refresh
@@ -331,8 +331,7 @@ function Services() {
             How We Transform Spaces
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-stone-500">
-            Every service is tailored to your space. No shortcuts, no compromises — just
-            a home that feels renewed.
+            Every service is tailored to your space. No shortcuts, no compromises. Just a home that feels renewed.
           </p>
         </div>
 
@@ -491,8 +490,7 @@ function Contact() {
           Let&rsquo;s Make It <span className="text-gold">Fresh Again</span>
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-white/80">
-          Ready to fall in love with your space all over again? Reach out and we&rsquo;ll
-          take care of the rest.
+          Ready to refresh your space? Reach out and we will take care of the rest.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -513,7 +511,7 @@ function Contact() {
         </div>
 
         <p className="mt-8 text-sm text-white/70">
-          Typically respond within 30 minutes &mdash; often faster.
+          Typically respond within 30 minutes. Often faster.
         </p>
       </div>
     </section>
