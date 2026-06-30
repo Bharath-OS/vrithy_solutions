@@ -11,6 +11,41 @@ const NAV_LINKS = [
 
 const SERVICES = [
   {
+    icon: "🏠",
+    title: "Residential Cleaning",
+    desc: "Complete home cleaning tailored to your lifestyle. Every room, every surface — left spotless and refreshingly clean.",
+  },
+  {
+    icon: "🏢",
+    title: "Apartment Cleaning",
+    desc: "Compact spaces cleaned with precision. We make the most of every square foot, leaving your apartment immaculate.",
+  },
+  {
+    icon: "🏪",
+    title: "Commercial Cleaning",
+    desc: "Professional cleaning for offices, retail spaces, and workplaces. A clean environment that impresses clients and staff alike.",
+  },
+  {
+    icon: "✦",
+    title: "Specialized Services",
+    desc: "From deep cleaning to post-renovation restoration — tailored solutions for those unique cleaning challenges.",
+  },
+  {
+    icon: "💧",
+    title: "Water Tank Cleaning",
+    desc: "Thorough tank cleaning and disinfection. Safe,干净 water for your home, with zero mess or disruption.",
+  },
+  {
+    icon: "🛋️",
+    title: "Sofa Shampoo Washing",
+    desc: "Deep fabric care that removes stains, odors, and allergens. Your upholstery, revived and refreshed.",
+  },
+  {
+    icon: "🧹",
+    title: "Interlock Cleaning",
+    desc: "Restore the beauty of your driveways and pathways. Pressure washing and deep cleaning for interlock surfaces.",
+  },
+  {
     icon: "✦",
     title: "Deep Clean Revival",
     desc: "Every nook, every corner — we restore your home to a state of immaculate freshness. A deep clean that leaves no trace behind.",
@@ -302,7 +337,7 @@ function Services() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {SERVICES.map((svc) => (
             <div
               key={svc.title}
