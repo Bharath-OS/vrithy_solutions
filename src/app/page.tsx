@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 
 const NAV_LINKS = [
@@ -155,8 +156,15 @@ function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#" className="font-display text-2xl font-bold tracking-tight text-fresh">
-          Vrithy
+        <a href="#" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Vrithy Solutions"
+            width={120}
+            height={36}
+            className="h-9 w-auto"
+            priority
+          />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -489,8 +497,14 @@ function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <a href="#" className="font-display text-xl font-bold text-white">
-              Vrithy
+            <a href="#" className="block">
+              <Image
+                src="/logo.png"
+                alt="Vrithy Solutions"
+                width={120}
+                height={36}
+                className="h-8 w-auto brightness-0 invert"
+              />
             </a>
             <p className="mt-1 text-sm text-stone-400">
               Premium home cleaning. Bangalore.
