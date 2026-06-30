@@ -536,8 +536,22 @@ function Footer() {
               />
             </a>
             <p className="mt-1 text-sm text-stone-400">
-              Premium home cleaning. Bangalore.
+              Premium home cleaning. Kozhikode.
             </p>
+          </div>
+          <div className="flex flex-col items-end gap-2 text-sm text-stone-400">
+            <p>21/203, Eenthum Kandi, Mathara, Kozhikode 673014</p>
+            <a href="tel:+919495804501" className="hover:text-white transition-colors">
+              +91 94958 04501
+            </a>
+            <a
+              href="https://www.instagram.com/vrithy_clt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              @vrithy_clt
+            </a>
           </div>
           <div className="flex items-center gap-6 text-sm text-stone-400">
             <a href="#services" className="hover:text-white transition-colors">
