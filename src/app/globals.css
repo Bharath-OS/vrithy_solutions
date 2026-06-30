@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-fresh: #0d9488;
-  --color-fresh-light: #14b8a6;
-  --color-fresh-dark: #0f766e;
+  --color-fresh: #228504;
+  --color-fresh-light: #2ea30a;
+  --color-fresh-dark: #1a6b03;
   --color-warm: #f59e0b;
+  --color-gold: #ffd600;
   --color-stone-50: #fafaf9;
   --color-stone-100: #f5f5f4;
   --color-stone-200: #e7e5e4;
@@ -37,7 +38,7 @@ body {
 .blob-1 {
   width: 500px;
   height: 500px;
-  background: #0d9488;
+  background: #228504;
   top: -10%;
   right: -10%;
   animation-delay: 0s;
@@ -46,7 +47,7 @@ body {
 .blob-2 {
   width: 400px;
   height: 400px;
-  background: #14b8a6;
+  background: #2ea30a;
   bottom: 20%;
   left: -8%;
   animation-delay: -5s;
@@ -64,7 +65,7 @@ body {
 .blob-4 {
   width: 450px;
   height: 450px;
-  background: #0f766e;
+  background: #1a6b03;
   bottom: -10%;
   right: 30%;
   animation-delay: -15s;
@@ -81,7 +82,7 @@ body {
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #0d9488, #14b8a6, #f59e0b);
+  background: linear-gradient(90deg, #228504, #2ea30a, #f59e0b);
   z-index: 100;
   transition: width 0.1s ease-out;
 }

@@ -455,13 +455,13 @@ function Contact() {
       }`}
     >
       <div className="mx-auto max-w-3xl text-center">
-        <span className="text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">
+        <span className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">
           Get In Touch
         </span>
         <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-3">
           Let&rsquo;s Make It Fresh Again
         </h2>
-        <p className="mx-auto mt-4 max-w-lg text-white/80">
+        <p className="mx-auto mt-4 max-w-lg text-gold/80">
           Ready to fall in love with your space all over again? Reach out and we&rsquo;ll
           take care of the rest.
         </p>
@@ -471,19 +471,19 @@ function Contact() {
             href="https://wa.me/919999999999?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-white px-8 py-3.5 text-base font-semibold text-fresh hover:bg-stone-100 transition-all shadow-lg"
+            className="rounded-full bg-gold px-8 py-3.5 text-base font-semibold text-fresh-dark hover:bg-[#e6c000] transition-all shadow-lg"
           >
             Chat on WhatsApp
           </a>
           <a
             href="mailto:hello@vrithy.in"
-            className="rounded-full border border-white/40 px-8 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition-all"
+            className="rounded-full border border-gold/50 px-8 py-3.5 text-base font-semibold text-gold hover:bg-gold/10 transition-all"
           >
             hello@vrithy.in
           </a>
         </div>
 
-        <p className="mt-8 text-sm text-white/60">
+        <p className="mt-8 text-sm text-gold/60">
           Typically respond within 30 minutes &mdash; often faster.
         </p>
       </div>
