@@ -232,35 +232,35 @@ function Hero() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/hero-bg.png')" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/80" />
+      <div className="absolute inset-0 bg-black/40" />
 
       <div className="blob blob-1" />
       <div className="blob blob-2" />
       <div className="blob blob-3" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        <span className="inline-block rounded-full bg-white/80 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold tracking-wider text-fresh shadow-sm uppercase mb-6">
+        <span className="inline-block rounded-full bg-white/90 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold tracking-wider text-fresh shadow-lg uppercase mb-6">
           Vrithy Solutions — Premium Home Cleaning
         </span>
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight text-stone-900">
+        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white [text-shadow:0_4px_20px_rgba(0,0,0,0.3)]">
           Refresh
           <br />
-          <span className="text-fresh">My Space</span>
+          <span className="text-[#ffd600]">My Space</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-stone-600">
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/90 [text-shadow:0_2px_12px_rgba(0,0,0,0.25)]">
           Premium home cleaning that brings the sparkle back. Thoughtful, thorough, and
           refreshingly different.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#contact"
-            className="rounded-full bg-fresh px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-fresh/25 hover:bg-fresh-dark hover:shadow-xl hover:shadow-fresh/30 transition-all"
+            className="rounded-full bg-fresh px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-black/20 hover:bg-fresh-dark hover:shadow-2xl transition-all"
           >
             Book Your Refresh
           </a>
           <a
             href="#services"
-            className="rounded-full border border-stone-300 bg-white/70 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-stone-700 hover:border-fresh/40 hover:text-fresh transition-all"
+            className="rounded-full border border-white/50 bg-white/20 backdrop-blur-md px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-black/15 hover:bg-white/30 transition-all"
           >
             See How We Work
           </a>
