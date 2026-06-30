@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Vrithy Solutions — Refresh Your Space",
   description:
     "Premium home cleaning that brings the sparkle back. Thoughtful, thorough, and refreshingly different.",
+  icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
 export default function RootLayout({
