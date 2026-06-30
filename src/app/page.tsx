@@ -228,12 +228,18 @@ function Navbar() {
 function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-bg.png')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/80" />
+
       <div className="blob blob-1" />
       <div className="blob blob-2" />
       <div className="blob blob-3" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        <span className="inline-block rounded-full bg-fresh/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-fresh uppercase mb-6">
+        <span className="inline-block rounded-full bg-white/80 backdrop-blur-sm px-4 py-1.5 text-xs font-semibold tracking-wider text-fresh shadow-sm uppercase mb-6">
           Vrithy Solutions — Premium Home Cleaning
         </span>
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight text-stone-900">
@@ -241,7 +247,7 @@ function Hero() {
           <br />
           <span className="text-fresh">My Space</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-stone-500">
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-stone-600">
           Premium home cleaning that brings the sparkle back. Thoughtful, thorough, and
           refreshingly different.
         </p>
@@ -254,7 +260,7 @@ function Hero() {
           </a>
           <a
             href="#services"
-            className="rounded-full border border-stone-300 bg-white/60 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-stone-700 hover:border-fresh/40 hover:text-fresh transition-all"
+            className="rounded-full border border-stone-300 bg-white/70 backdrop-blur-sm px-8 py-3.5 text-base font-semibold text-stone-700 hover:border-fresh/40 hover:text-fresh transition-all"
           >
             See How We Work
           </a>
