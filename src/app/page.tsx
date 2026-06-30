@@ -272,8 +272,7 @@ function Hero() {
           <span className="text-[#ffd600]">My Space</span>
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/90 [text-shadow:0_2px_12px_rgba(0,0,0,0.25)]">
-          Premium home cleaning that brings the sparkle back. Thoughtful, thorough, and
-          refreshingly different.
+          100% satisfaction + 100% Vrithy
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
