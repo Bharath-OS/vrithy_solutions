@@ -392,7 +392,7 @@ function Process() {
         <div className="grid gap-8 md:grid-cols-3">
           {PROCESS.map((step) => (
             <div key={step.step} className="relative text-center md:text-left">
-              <span className="font-display text-7xl font-bold text-fresh/10 select-none">
+              <span className="font-display text-7xl font-bold text-fresh/60 select-none">
                 {step.step}
               </span>
               <h3 className="mt-2 text-xl font-semibold text-stone-900">{step.title}</h3>
