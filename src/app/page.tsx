@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { client } from "@/sanity/lib/client";
+import { allDataQuery } from "@/sanity/lib/queries";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -11,57 +13,88 @@ const NAV_LINKS = [
   { label: "Testimonials", href: "#testimonials" },
 ];
 
-const SERVICES = [
-  { title: "Residential Cleaning", desc: "Making everyday homes feel fresh again." },
-  { title: "Apartment Cleaning", desc: "Compact spaces cleaned with care and precision." },
-  { title: "Commercial Cleaning", desc: "Professional cleaning for offices and businesses." },
-  { title: "Specialized Services", desc: "Deep cleans, post renovation, move in and out." },
-  { title: "Water Tank Cleaning", desc: "Clean water starts with a clean tank." },
-  { title: "Sofa Shampoo Washing", desc: "Stains and odours gone. Your sofa, revived." },
-  { title: "Interlock Cleaning", desc: "Driveways and walkways restored and refreshed." },
+const DEFAULT_SERVICES = [
+  { title: "Residential Cleaning", description: "Making everyday homes feel fresh again." },
+  { title: "Apartment Cleaning", description: "Compact spaces cleaned with care and precision." },
+  { title: "Commercial Cleaning", description: "Professional cleaning for offices and businesses." },
+  { title: "Specialized Services", description: "Deep cleans, post renovation, move in and out." },
+  { title: "Water Tank Cleaning", description: "Clean water starts with a clean tank." },
+  { title: "Sofa Shampoo Washing", description: "Stains and odours gone. Your sofa, revived." },
+  { title: "Interlock Cleaning", description: "Driveways and walkways restored and refreshed." },
 ];
 
-const PROCESS_STEPS = [
-  { step: "01", title: "Contact Us", desc: "Reach out and tell us what you need." },
-  { step: "02", title: "We Inspect", desc: "We visit, assess, and plan the perfect clean." },
-  { step: "03", title: "Professional Cleaning", desc: "Our team arrives fully equipped and gets to work." },
-  { step: "04", title: "Final Check", desc: "We inspect every corner before we leave." },
-  { step: "05", title: "Enjoy Your Refreshed Space", desc: "Walk into a home that feels brand new." },
+const DEFAULT_PROCESS = [
+  { step: "01", title: "Contact Us", description: "Reach out and tell us what you need." },
+  { step: "02", title: "We Inspect", description: "We visit, assess, and plan the perfect clean." },
+  { step: "03", title: "Professional Cleaning", description: "Our team arrives fully equipped and gets to work." },
+  { step: "04", title: "Final Check", description: "We inspect every corner before we leave." },
+  { step: "05", title: "Enjoy Your Refreshed Space", description: "Walk into a home that feels brand new." },
 ];
 
-const WHY_CHOOSE = [
-  { title: "Every Corner Matters", desc: "We clean beyond what the eye notices." },
-  { title: "We Bring Everything", desc: "No equipment required from you." },
-  { title: "Hassle-Free Experience", desc: "One call. One visit. Complete cleaning." },
-  { title: "Professional Equipment", desc: "Industrial-grade tools for better results." },
-  { title: "Local Team", desc: "Built in Kozhikode. Serving Kozhikode with pride." },
-  { title: "Satisfaction Comes First", desc: "We aren't done until you're happy." },
+const DEFAULT_WHY_CHOOSE = [
+  { title: "Every Corner Matters", description: "We clean beyond what the eye notices." },
+  { title: "We Bring Everything", description: "No equipment required from you." },
+  { title: "Hassle-Free Experience", description: "One call. One visit. Complete cleaning." },
+  { title: "Professional Equipment", description: "Industrial-grade tools for better results." },
+  { title: "Local Team", description: "Built in Kozhikode. Serving Kozhikode with pride." },
+  { title: "Satisfaction Comes First", description: "We aren't done until you're happy." },
 ];
 
-const TESTIMONIALS = [
-  {
-    quote: "Vrithy made our home feel brand new. The attention to detail was remarkable.",
-    name: "Sarah M.",
-    location: "Koramangala, Bangalore",
-  },
-  {
-    quote: "The most thorough cleaning we have ever had. The eco-friendly products are a huge plus.",
-    name: "James & Priya R.",
-    location: "Indiranagar, Bangalore",
-  },
-  {
-    quote: "I booked a one time refresh and now I am a monthly regular. Worth every rupee.",
-    name: "Ananya K.",
-    location: "Whitefield, Bangalore",
-  },
+const DEFAULT_TESTIMONIALS = [
+  { quote: "Vrithy made our home feel brand new. The attention to detail was remarkable.", name: "Sarah M.", location: "Koramangala, Bangalore" },
+  { quote: "The most thorough cleaning we have ever had. The eco-friendly products are a huge plus.", name: "James & Priya R.", location: "Indiranagar, Bangalore" },
+  { quote: "I booked a one time refresh and now I am a monthly regular. Worth every rupee.", name: "Ananya K.", location: "Whitefield, Bangalore" },
 ];
 
-const STATS = [
+const DEFAULT_STATS = [
   { number: "20+", label: "Spaces Cleaned" },
   { number: "100%", label: "Dedication" },
   { number: "Same Day", label: "Response" },
   { number: "Kozhikode", label: "Local Team" },
 ];
+
+const OFFER_ICONS = [
+  <svg key="house" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
+  </svg>,
+  <svg key="office" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+    <line x1="8" y1="21" x2="16" y2="21" />
+    <line x1="12" y1="17" x2="12" y2="21" />
+  </svg>,
+  <svg key="star" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>,
+];
+
+interface SanityData {
+  hero?: { headline?: string; subtitle?: string };
+  difference?: { headline?: string; body?: string };
+  services?: { title: string; description: string }[];
+  whyChoose?: { title: string; description: string }[];
+  processSteps?: { step: string; title: string; description: string }[];
+  testimonials?: { quote: string; name: string; location: string }[];
+  offers?: { discount: string; title: string; description: string; until?: string; cta?: string }[];
+  contact?: {
+    address?: string; phone?: string; phoneLink?: string;
+    instagram?: string; instagramUrl?: string;
+    whatsappNumber?: string; whatsappMessage?: string;
+  };
+  siteSettings?: { tagline?: string };
+}
+
+function useSanityData() {
+  const [data, setData] = useState<SanityData | null>(null);
+
+  useEffect(() => {
+    client.fetch(allDataQuery)
+      .then((result) => setData(result as SanityData))
+      .catch(() => {});
+  }, []);
+
+  return data;
+}
 
 function useScrollVisibility(threshold = 0.1) {
   const [visible, setVisible] = useState(false);
@@ -103,9 +136,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-stone-200/60 shadow-sm"
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-stone-200/60 shadow-sm">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center">
           <Image
@@ -118,17 +149,17 @@ function Navbar() {
           />
         </a>
 
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-gray-text hover:text-fresh transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+        <div className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-gray-text hover:text-fresh transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -163,7 +194,12 @@ function Navbar() {
   );
 }
 
-function Hero() {
+interface HeroProps {
+  headline?: string;
+  subtitle?: string;
+}
+
+function Hero({ headline = "Transform Your Space,<br />Not Your Schedule.", subtitle = "Professional deep cleaning for homes, apartments, offices and commercial spaces across Kozhikode. We bring the people, equipment and attention to detail so you simply enjoy the results." }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -191,8 +227,7 @@ function Hero() {
           transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.1] tracking-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.35)]"
         >
-          Transform Your Space,<br />
-          <span className="text-gold">Not Your Schedule.</span>
+          <span dangerouslySetInnerHTML={{ __html: headline.replace("Not Your Schedule.", '<span class="text-gold">Not Your Schedule.</span>') }} />
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -200,8 +235,7 @@ function Hero() {
           transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-white/85 [text-shadow:0_2px_12px_rgba(0,0,0,0.25)]"
         >
-          Professional deep cleaning for homes, apartments, offices and commercial spaces across Kozhikode.
-          We bring the people, equipment and attention to detail so you simply enjoy the results.
+          {subtitle}
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -262,7 +296,12 @@ function Hero() {
   );
 }
 
-function VrithyDifference() {
+interface DifferenceProps {
+  headline?: string;
+  body?: string;
+}
+
+function VrithyDifference({ headline = "More Than Cleaning. We Restore Spaces.", body = "" }: DifferenceProps) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -290,14 +329,22 @@ function VrithyDifference() {
               The Vrithy Difference
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-dark-text mt-3">
-              More Than Cleaning. We Restore Spaces.
+              {headline}
             </h2>
-            <p className="mt-6 text-gray-text leading-relaxed">
-              Started by hardworking teenagers. Built on dedication. Every project is treated with care.
-            </p>
-            <p className="mt-4 text-gray-text leading-relaxed">
-              Cleaning isnt just about removing dirt. Its about restoring comfort. When we step out, you walk into a space that feels lighter, fresher, and truly yours again.
-            </p>
+            {body ? (
+              body.split("\n").map((p, i) => (
+                <p key={i} className="mt-4 text-gray-text leading-relaxed">{p}</p>
+              ))
+            ) : (
+              <>
+                <p className="mt-6 text-gray-text leading-relaxed">
+                  Started by hardworking teenagers. Built on dedication. Every project is treated with care.
+                </p>
+                <p className="mt-4 text-gray-text leading-relaxed">
+                  Cleaning isnt just about removing dirt. Its about restoring comfort. When we step out, you walk into a space that feels lighter, fresher, and truly yours again.
+                </p>
+              </>
+            )}
             <div className="mt-8 flex gap-6">
               <div>
                 <span className="font-number text-2xl font-bold text-fresh">50+</span>
@@ -319,16 +366,17 @@ function VrithyDifference() {
   );
 }
 
-function Services() {
+interface ServiceItem {
+  title: string;
+  description: string;
+}
+
+function Services({ services = DEFAULT_SERVICES }: { services?: ServiceItem[] }) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      id="services"
-      ref={ref}
-      className="relative py-28 px-6"
-    >
+    <section id="services" ref={ref} className="relative py-28 px-6">
       <div className="blob blob-4" />
 
       <div className="relative z-10 mx-auto max-w-6xl">
@@ -345,7 +393,7 @@ function Services() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {SERVICES.map((svc, i) => (
+          {services.map((svc, i) => (
             <motion.div
               key={svc.title}
               initial={{ opacity: 0, y: 24 }}
@@ -362,7 +410,7 @@ function Services() {
               </div>
               <div className="p-5 border-t border-border-light">
                 <h3 className="text-base font-bold text-dark-text">{svc.title}</h3>
-                <p className="mt-1.5 text-sm text-gray-text leading-relaxed">{svc.desc}</p>
+                <p className="mt-1.5 text-sm text-gray-text leading-relaxed">{svc.description}</p>
                 <span className="mt-3 inline-flex items-center text-xs font-semibold text-fresh gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   Learn More
                   <span>&rarr;</span>
@@ -376,7 +424,56 @@ function Services() {
   );
 }
 
-function Process() {
+interface WhyChooseItem {
+  title: string;
+  description: string;
+}
+
+function WhyChoose({ reasons = DEFAULT_WHY_CHOOSE }: { reasons?: WhyChooseItem[] }) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section id="why-vrithy" ref={ref} className="relative py-28 px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center mb-16">
+          <span className="text-xs font-semibold tracking-[0.2em] text-fresh uppercase">
+            Why Vrithy
+          </span>
+          <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-dark-text mt-3">
+            Why Families and Businesses Choose Vrithy
+          </h2>
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {reasons.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl bg-bg-light border border-border-light p-6 card-hover"
+            >
+              <div className="w-10 h-10 rounded-xl gradient-fresh flex items-center justify-center text-white text-sm font-bold">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <h3 className="mt-4 font-bold text-dark-text">{item.title}</h3>
+              <p className="mt-1.5 text-sm text-gray-text leading-relaxed">{item.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+interface ProcessStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+function Process({ steps = DEFAULT_PROCESS }: { steps?: ProcessStep[] }) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -396,7 +493,7 @@ function Process() {
         </div>
 
         <div className="relative space-y-0">
-          {PROCESS_STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <motion.div
               key={step.step}
               initial={{ opacity: 0, y: 16 }}
@@ -408,13 +505,13 @@ function Process() {
                 <div className="w-10 h-10 rounded-full gradient-fresh flex items-center justify-center text-white font-number font-bold text-sm shrink-0 relative z-10">
                   {step.step}
                 </div>
-                {i < PROCESS_STEPS.length - 1 && (
+                {i < steps.length - 1 && (
                   <div className="w-0.5 flex-1 bg-border-light mt-1" />
                 )}
               </div>
               <div className="pt-1.5">
                 <h3 className="font-bold text-dark-text">{step.title}</h3>
-                <p className="mt-1 text-sm text-gray-text leading-relaxed">{step.desc}</p>
+                <p className="mt-1 text-sm text-gray-text leading-relaxed">{step.description}</p>
               </div>
             </motion.div>
           ))}
@@ -424,45 +521,13 @@ function Process() {
   );
 }
 
-function WhyChoose() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <section id="why-vrithy" ref={ref} className="relative py-28 px-6">
-      <div className="mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <span className="text-xs font-semibold tracking-[0.2em] text-fresh uppercase">
-            Why Vrithy
-          </span>
-          <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-dark-text mt-3">
-            Why Families and Businesses Choose Vrithy
-          </h2>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {WHY_CHOOSE.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-2xl bg-bg-light border border-border-light p-6 card-hover"
-            >
-              <div className="w-10 h-10 rounded-xl gradient-fresh flex items-center justify-center text-white text-sm font-bold">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <h3 className="mt-4 font-bold text-dark-text">{item.title}</h3>
-              <p className="mt-1.5 text-sm text-gray-text leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+interface TestimonialItem {
+  quote: string;
+  name: string;
+  location?: string;
 }
 
-function Testimonials() {
+function Testimonials({ testimonials = DEFAULT_TESTIMONIALS, stats = DEFAULT_STATS }: { testimonials?: TestimonialItem[]; stats?: { number: string; label: string }[] }) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const statsRef = useRef<HTMLDivElement>(null);
@@ -503,7 +568,7 @@ function Testimonials() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
               initial={{ opacity: 0, y: 20 }}
@@ -524,14 +589,14 @@ function Testimonials() {
               <p className="text-sm leading-relaxed text-gray-text">&ldquo;{t.quote}&rdquo;</p>
               <div className="mt-4 pt-4 border-t border-border-light">
                 <p className="text-sm font-bold text-dark-text">{t.name}</p>
-                <p className="text-xs text-gray-text">{t.location}</p>
+                {t.location && <p className="text-xs text-gray-text">{t.location}</p>}
               </div>
             </motion.div>
           ))}
         </div>
 
         <div ref={statsRef} className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {STATS.map((stat, i) => (
+          {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 16 }}
@@ -551,35 +616,18 @@ function Testimonials() {
   );
 }
 
-function SpecialOffer() {
-  const OFFERS = [
-    {
-      discount: "20% OFF",
-      title: "House Deep Cleaning",
-      desc: "Complete home refresh. Every room, every corner, every surface. Limited time.",
-      until: "Aug 15, 2026",
-      cta: "I'd like to claim the 20% OFF offer.",
-      icon: (
-        <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          <polyline points="9 22 9 12 15 12 15 22" />
-        </svg>
-      ),
-    },
-    {
-      discount: "15% OFF",
-      title: "Office & Workspace",
-      desc: "Professional cleaning for your workplace. Boost productivity with a spotless environment.",
-      until: "Sep 1, 2026",
-      cta: "I'd like to claim the 15% OFF office cleaning offer.",
-      icon: (
-        <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ),
-    },
+interface OfferItem {
+  discount: string;
+  title: string;
+  description: string;
+  until?: string;
+  cta?: string;
+}
+
+function SpecialOffer({ offers = [] }: { offers?: OfferItem[] }) {
+  const displayOffers = offers.length > 0 ? offers.slice(0, 4) : [
+    { discount: "20% OFF", title: "House Deep Cleaning", description: "Complete home refresh. Every room, every corner, every surface. Limited time.", until: "Aug 15, 2026", cta: "I'd like to claim the 20% OFF offer." },
+    { discount: "15% OFF", title: "Office & Workspace", description: "Professional cleaning for your workplace. Boost productivity with a spotless environment.", until: "Sep 1, 2026", cta: "I'd like to claim the 15% OFF office cleaning offer." },
   ];
 
   return (
@@ -598,7 +646,7 @@ function SpecialOffer() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {OFFERS.map((offer, i) => (
+          {displayOffers.map((offer, i) => (
             <motion.div
               key={offer.title}
               initial={{ opacity: 0, y: 24 }}
@@ -611,7 +659,7 @@ function SpecialOffer() {
               <div className="relative z-10">
                 <div className="flex items-start justify-between">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fresh to-fresh-dark text-white flex items-center justify-center">
-                    {offer.icon}
+                    {OFFER_ICONS[i % OFFER_ICONS.length]}
                   </div>
                   <span className="font-number text-3xl font-extrabold text-fresh">
                     {offer.discount}
@@ -621,17 +669,19 @@ function SpecialOffer() {
                   {offer.title}
                 </h3>
                 <p className="mt-2 text-gray-text leading-relaxed">
-                  {offer.desc}
+                  {offer.description}
                 </p>
-                <div className="mt-4 flex items-center gap-2 text-xs text-gray-text/60">
-                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                  </svg>
-                  <span>Valid until <strong className="text-fresh">{offer.until}</strong></span>
-                </div>
+                {offer.until && (
+                  <div className="mt-4 flex items-center gap-2 text-xs text-gray-text/60">
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span>Valid until <strong className="text-fresh">{offer.until}</strong></span>
+                  </div>
+                )}
                 <a
-                  href={`https://wa.me/919495804501?text=Hi%20Vrithy!%20${encodeURIComponent(offer.cta)}`}
+                  href={`https://wa.me/919495804501?text=Hi%20Vrithy!%20${encodeURIComponent(offer.cta || "I'd like to claim this offer.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-fresh px-6 py-3 text-sm font-bold text-white hover:bg-fresh-dark transition-all shadow-lg group-hover:shadow-xl"
@@ -648,7 +698,27 @@ function SpecialOffer() {
   );
 }
 
-function Contact() {
+interface ContactInfo {
+  address?: string;
+  phone?: string;
+  phoneLink?: string;
+  instagram?: string;
+  instagramUrl?: string;
+  whatsappNumber?: string;
+  whatsappMessage?: string;
+}
+
+function Contact({ info = {} }: { info?: ContactInfo }) {
+  const {
+    address = "21/203, Eenthum Kandi, Mathara, Kozhikode 673014",
+    phone = "+91 94958 04501",
+    phoneLink = "+919495804501",
+    instagram = "@vrithy_clt",
+    instagramUrl = "https://www.instagram.com/vrithy_clt/",
+    whatsappNumber = "919495804501",
+    whatsappMessage = "Hi Vrithy! I'd love to refresh my space.",
+  } = info;
+
   return (
     <section id="contact" className="relative py-28 px-6 gradient-fresh">
       <div className="mx-auto max-w-4xl text-center">
@@ -660,14 +730,14 @@ function Contact() {
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-2 text-white/80 text-sm font-semibold">
-          <p className="font-semibold">21/203, Eenthum Kandi, Mathara, Kozhikode 673014</p>
-          <a href="tel:+919495804501" className="hover:text-white transition-colors font-semibold">+91 94958 04501</a>
-          <a href="https://www.instagram.com/vrithy_clt/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-semibold">@vrithy_clt</a>
+          <p className="font-semibold">{address}</p>
+          <a href={`tel:${phoneLink}`} className="hover:text-white transition-colors font-semibold">{phone}</a>
+          <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-semibold">{instagram}</a>
         </div>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://wa.me/919495804501?text=Hi%20Vrithy!%20I'd%20love%20to%20refresh%20my%20space."
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full bg-gold px-10 py-4 text-base font-bold text-fresh-dark hover:bg-[#e6c000] transition-all shadow-xl shadow-black/15"
@@ -678,7 +748,7 @@ function Contact() {
 
         <div className="mt-10 mx-auto max-w-xl h-48 rounded-2xl overflow-hidden border border-white/20">
           <iframe
-            src="https://www.google.com/maps?q=21/203+Eenthum+Kandi+Mathara+Kozhikode+673014&output=embed"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`}
             width="100%"
             height="100%"
             style={{ border: 0 }}
@@ -693,7 +763,7 @@ function Contact() {
   );
 }
 
-function Footer() {
+function Footer({ tagline = "100% Satisfaction + 100% Vrithy. Your trusted cleaning partner in Kozhikode." }: { tagline?: string }) {
   return (
     <footer className="bg-dark-text px-6 py-16">
       <div className="mx-auto max-w-6xl">
@@ -707,7 +777,7 @@ function Footer() {
               <span className="font-heading text-xl font-extrabold text-white tracking-tight">Vrithy</span>
             </a>
             <p className="mt-3 text-sm text-white/40 leading-relaxed max-w-xs">
-              100% Satisfaction + 100% Vrithy. Your trusted cleaning partner in Kozhikode.
+              {tagline}
             </p>
           </div>
 
@@ -758,21 +828,32 @@ function Footer() {
 
 export default function Home() {
   const waVisible = useScrollVisibility(0.8);
+  const data = useSanityData();
+
+  const services = data?.services && data.services.length > 0 ? data.services : DEFAULT_SERVICES;
+  const processSteps = data?.processSteps && data.processSteps.length > 0 ? data.processSteps : DEFAULT_PROCESS;
+  const whyChoose = data?.whyChoose && data.whyChoose.length > 0 ? data.whyChoose : DEFAULT_WHY_CHOOSE;
+  const testimonials = data?.testimonials && data.testimonials.length > 0 ? data.testimonials : DEFAULT_TESTIMONIALS;
+  const offers = data?.offers && data.offers.length > 0 ? data.offers : [];
+  const contact = data?.contact || {};
+  const tagline = data?.siteSettings?.tagline || "100% Satisfaction + 100% Vrithy. Your trusted cleaning partner in Kozhikode.";
+  const heroData = data?.hero || {};
+  const differenceData = data?.difference || {};
 
   return (
     <>
       <WhatsAppCTA visible={waVisible} />
 
       <Navbar />
-      <Hero />
-      <VrithyDifference />
-      <Services />
-      <WhyChoose />
-      <Process />
-      <Testimonials />
-      <SpecialOffer />
-      <Contact />
-      <Footer />
+      <Hero headline={heroData.headline} subtitle={heroData.subtitle} />
+      <VrithyDifference headline={differenceData.headline} body={differenceData.body} />
+      <Services services={services} />
+      <WhyChoose reasons={whyChoose} />
+      <Process steps={processSteps} />
+      <Testimonials testimonials={testimonials} />
+      <SpecialOffer offers={offers} />
+      <Contact info={contact} />
+      <Footer tagline={tagline} />
     </>
   );
 }
