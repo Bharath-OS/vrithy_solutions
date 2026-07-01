@@ -141,9 +141,9 @@ function Navbar() {
           <Image
             src="/logo.png"
             alt="Vrithy Solutions"
-            width={120}
-            height={36}
-            className="h-9 w-auto"
+            width={160}
+            height={48}
+            className="h-12 w-auto"
             priority
           />
         </a>
@@ -684,9 +684,9 @@ function Footer() {
               <Image
                 src="/logo.png"
                 alt="Vrithy Solutions"
-                width={120}
-                height={36}
-                className="h-8 w-auto brightness-0 invert"
+                width={160}
+                height={48}
+                className="h-12 w-auto brightness-0 invert"
               />
             </a>
             <p className="mt-2 text-sm text-white/50 font-heading font-bold">
