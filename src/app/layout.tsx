@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,15 +7,20 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const playfair = Playfair_Display({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-manrope",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
 });
 
 export const metadata: Metadata = {
   title: "Vrithy Solutions | Refresh Your Space",
   description:
-    "Premium home cleaning that brings the sparkle back. Thoughtful, thorough, and refreshingly different.",
+    "Professional deep cleaning for homes, apartments, offices and commercial spaces across Kozhikode.",
   icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
@@ -27,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} scroll-smooth`}
+      className={`${inter.variable} ${manrope.variable} ${spaceGrotesk.variable} scroll-smooth`}
     >
       <body className="antialiased">{children}</body>
     </html>

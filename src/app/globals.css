@@ -2,10 +2,14 @@
 
 @theme inline {
   --color-fresh: #228504;
-  --color-fresh-light: #2ea30a;
+  --color-fresh-light: #2f9c08;
   --color-fresh-dark: #1a6b03;
-  --color-warm: #f59e0b;
   --color-gold: #ffd600;
+  --color-warm: #f59e0b;
+  --color-bg-light: #f7faf6;
+  --color-gray-text: #6b6b6b;
+  --color-dark-text: #1e1e1e;
+  --color-border-light: #e6eae5;
   --color-stone-50: #fafaf9;
   --color-stone-100: #f5f5f4;
   --color-stone-200: #e7e5e4;
@@ -17,12 +21,13 @@
   --color-stone-800: #292524;
   --color-stone-900: #1c1917;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-heading: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-number: "Space Grotesk", ui-monospace, monospace;
 }
 
 body {
-  background: #fafaf9;
-  color: #1c1917;
+  background: #ffffff;
+  color: #1e1e1e;
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -30,7 +35,7 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.15;
+  opacity: 0.12;
   pointer-events: none;
   animation: blobFloat 20s ease-in-out infinite;
 }
@@ -47,7 +52,7 @@ body {
 .blob-2 {
   width: 400px;
   height: 400px;
-  background: #2ea30a;
+  background: #2f9c08;
   bottom: 20%;
   left: -8%;
   animation-delay: -5s;
@@ -56,7 +61,7 @@ body {
 .blob-3 {
   width: 350px;
   height: 350px;
-  background: #f59e0b;
+  background: #ffd600;
   top: 40%;
   right: -5%;
   animation-delay: -10s;
@@ -82,7 +87,7 @@ body {
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #228504, #2ea30a, #f59e0b);
+  background: linear-gradient(90deg, #228504, #2f9c08, #ffd600);
   z-index: 100;
   transition: width 0.1s ease-out;
 }
@@ -113,16 +118,26 @@ body {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -12px rgba(13, 148, 136, 0.15);
+  box-shadow: 0 20px 40px -12px rgba(34, 133, 4, 0.12);
 }
 
-.section-fade {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+.service-card {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.section-fade.visible {
-  opacity: 1;
-  transform: translateY(0);
+.service-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 24px 48px -16px rgba(34, 133, 4, 0.15);
+}
+
+.timeline-line {
+  transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-number {
+  font-family: "Space Grotesk", ui-monospace, monospace;
+}
+
+.gradient-fresh {
+  background: linear-gradient(135deg, #228504, #2f9c08);
 }
