@@ -582,35 +582,88 @@ function Testimonials() {
 }
 
 function SpecialOffer() {
+  const OFFERS = [
+    {
+      discount: "20% OFF",
+      title: "House Deep Cleaning",
+      desc: "Complete home refresh. Every room, every corner, every surface. Limited time.",
+      cta: "I'd like to claim the 20% OFF offer.",
+      icon: (
+        <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+      ),
+    },
+    {
+      discount: "15% OFF",
+      title: "Office & Workspace",
+      desc: "Professional cleaning for your workplace. Boost productivity with a spotless environment.",
+      cta: "I'd like to claim the 15% OFF office cleaning offer.",
+      icon: (
+        <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      ),
+    },
+  ];
+
   return (
-    <section className="py-16 px-6">
-      <div className="mx-auto max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="rounded-3xl gradient-fresh p-10 sm:p-14 text-center text-white"
-        >
-          <span className="inline-block text-5xl sm:text-6xl font-number font-extrabold leading-none">
-            20% OFF
+    <section className="py-28 px-6">
+      <div className="mx-auto max-w-5xl">
+        <div className="text-center mb-14">
+          <span className="text-xs font-semibold tracking-[0.2em] text-fresh uppercase">
+            Limited Time
           </span>
-          <h3 className="mt-3 font-heading text-2xl sm:text-3xl font-extrabold">
-            House Deep Cleaning
-          </h3>
-          <p className="mt-3 text-white/80 max-w-md mx-auto">
-            Limited time offer. Book now and give your home the refresh it deserves.
+          <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-dark-text mt-3">
+            Special Offers
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-gray-text">
+            Grab a deal and give your space the care it deserves.
           </p>
-          <a
-            href="https://wa.me/919495804501?text=Hi%20Vrithy!%20I'd%20like%20to%20claim%20the%2020%25%20OFF%20offer."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-base font-bold text-fresh-dark hover:bg-stone-100 transition-all shadow-xl"
-          >
-            Claim on WhatsApp
-            <span>&rarr;</span>
-          </a>
-        </motion.div>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          {OFFERS.map((offer, i) => (
+            <motion.div
+              key={offer.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative rounded-3xl bg-white border border-border-light p-8 sm:p-10 overflow-hidden group"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-fresh/5 rounded-bl-[100%] -z-0" />
+              <div className="relative z-10">
+                <div className="flex items-start justify-between">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fresh to-fresh-dark text-white flex items-center justify-center">
+                    {offer.icon}
+                  </div>
+                  <span className="font-number text-3xl font-extrabold text-fresh">
+                    {offer.discount}
+                  </span>
+                </div>
+                <h3 className="mt-5 font-heading text-2xl font-extrabold text-dark-text">
+                  {offer.title}
+                </h3>
+                <p className="mt-2 text-gray-text leading-relaxed">
+                  {offer.desc}
+                </p>
+                <a
+                  href={`https://wa.me/919495804501?text=Hi%20Vrithy!%20${encodeURIComponent(offer.cta)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-fresh px-6 py-3 text-sm font-bold text-white hover:bg-fresh-dark transition-all shadow-lg group-hover:shadow-xl"
+                >
+                  Claim on WhatsApp
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -621,7 +674,7 @@ function Contact() {
     <section id="contact" className="relative py-28 px-6 gradient-fresh">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-white">
-          Ready to Walk Into a Cleaner Space?
+          Ready to Walk Into a <span className="text-gold">Cleaner Space</span>?
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-white/80">
           One call and we take care of everything. Your home, refreshed.
