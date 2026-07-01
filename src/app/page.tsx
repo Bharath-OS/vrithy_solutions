@@ -655,14 +655,14 @@ function Contact() {
         <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-white">
           Ready to Walk Into a <span className="text-gold">Cleaner Space</span>?
         </h2>
-        <p className="mx-auto mt-4 max-w-lg text-white/80">
+        <p className="mx-auto mt-4 max-w-lg text-white/80 font-medium">
           One call and we take care of everything. Your home, refreshed.
         </p>
 
-        <div className="mt-8 flex flex-col items-center gap-2 text-white/70 text-sm">
-          <p>21/203, Eenthum Kandi, Mathara, Kozhikode 673014</p>
-          <a href="tel:+919495804501" className="hover:text-white transition-colors">+91 94958 04501</a>
-          <a href="https://www.instagram.com/vrithy_clt/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@vrithy_clt</a>
+        <div className="mt-8 flex flex-col items-center gap-2 text-white/80 text-sm font-semibold">
+          <p className="font-semibold">21/203, Eenthum Kandi, Mathara, Kozhikode 673014</p>
+          <a href="tel:+919495804501" className="hover:text-white transition-colors font-semibold">+91 94958 04501</a>
+          <a href="https://www.instagram.com/vrithy_clt/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-semibold">@vrithy_clt</a>
         </div>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
