@@ -63,24 +63,6 @@ const STATS = [
   { number: "Kozhikode", label: "Local Team" },
 ];
 
-function useScrollProgress() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return progress;
-}
-
 function useScrollVisibility(threshold = 0.1) {
   const [visible, setVisible] = useState(false);
 
@@ -95,18 +77,6 @@ function useScrollVisibility(threshold = 0.1) {
   }, [threshold]);
 
   return visible;
-}
-
-function FreshnessMeter({ progress }: { progress: number }) {
-  const pct = Math.round(progress * 100);
-  return (
-    <>
-      <div className="freshness-meter" style={{ width: `${pct}%` }} />
-      <div className="fixed top-3 right-4 z-[101] text-[11px] font-semibold tracking-wider uppercase text-fresh/70 select-none">
-        {pct}% Fresh
-      </div>
-    </>
-  );
 }
 
 function WhatsAppCTA({ visible }: { visible: boolean }) {
@@ -587,6 +557,7 @@ function SpecialOffer() {
       discount: "20% OFF",
       title: "House Deep Cleaning",
       desc: "Complete home refresh. Every room, every corner, every surface. Limited time.",
+      until: "Aug 15, 2026",
       cta: "I'd like to claim the 20% OFF offer.",
       icon: (
         <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -599,6 +570,7 @@ function SpecialOffer() {
       discount: "15% OFF",
       title: "Office & Workspace",
       desc: "Professional cleaning for your workplace. Boost productivity with a spotless environment.",
+      until: "Sep 1, 2026",
       cta: "I'd like to claim the 15% OFF office cleaning offer.",
       icon: (
         <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -651,6 +623,13 @@ function SpecialOffer() {
                 <p className="mt-2 text-gray-text leading-relaxed">
                   {offer.desc}
                 </p>
+                <div className="mt-4 flex items-center gap-2 text-xs text-gray-text/60">
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>Valid until <strong className="text-fresh">{offer.until}</strong></span>
+                </div>
                 <a
                   href={`https://wa.me/919495804501?text=Hi%20Vrithy!%20${encodeURIComponent(offer.cta)}`}
                   target="_blank"
@@ -778,12 +757,10 @@ function Footer() {
 }
 
 export default function Home() {
-  const progress = useScrollProgress();
   const waVisible = useScrollVisibility(0.8);
 
   return (
     <>
-      <FreshnessMeter progress={progress} />
       <WhatsAppCTA visible={waVisible} />
 
       <Navbar />
