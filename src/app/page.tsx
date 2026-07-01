@@ -57,10 +57,10 @@ const TESTIMONIALS = [
 ];
 
 const STATS = [
-  { number: "500+", label: "Spaces Refreshed" },
-  { number: "98%", label: "Happy Customers" },
-  { number: "Same Day", label: "Response" },
+  { number: "20+", label: "Spaces Cleaned" },
   { number: "100%", label: "Dedication" },
+  { number: "Same Day", label: "Response" },
+  { number: "Kozhikode", label: "Local Team" },
 ];
 
 function useScrollProgress() {
@@ -387,14 +387,14 @@ function Services() {
           </p>
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-5 space-y-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {SERVICES.map((svc, i) => (
             <motion.div
               key={svc.title}
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="service-card break-inside-avoid rounded-3xl bg-white border border-border-light overflow-hidden group cursor-pointer"
+              className="service-card rounded-3xl bg-white border border-border-light overflow-hidden group cursor-pointer"
             >
               <div className="aspect-[4/3] bg-bg-light flex items-center justify-center text-gray-text/40 text-sm overflow-hidden">
                 <div className="w-full h-full bg-gradient-to-br from-fresh/5 to-fresh/10 flex items-center justify-center">
@@ -510,14 +510,13 @@ function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const statsRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-40px" });
-  const [counts, setCounts] = useState({ 0: 0, 1: 0, 2: 0, 3: 0 });
+  const [counts, setCounts] = useState({ 0: 0, 1: 0 });
 
   useEffect(() => {
     if (statsInView) {
-      const targets = [500, 98, 0, 100];
+      const targets = [20, 100];
       const intervalRefs: ReturnType<typeof setInterval>[] = [];
       targets.forEach((target, i) => {
-        if (target === 0) return;
         const id = setInterval(() => {
           setCounts((prev) => {
             const next = prev[i as keyof typeof prev] + 1;
@@ -527,7 +526,7 @@ function Testimonials() {
             }
             return { ...prev, [i]: next };
           });
-        }, 20 + i * 10);
+        }, 30 + i * 15);
         intervalRefs.push(id);
       });
       return () => intervalRefs.forEach(clearInterval);
@@ -584,7 +583,7 @@ function Testimonials() {
               className="text-center"
             >
               <span className="font-number text-3xl sm:text-4xl font-bold text-fresh block">
-                {stat.number.includes("+") ? `${counts[i as keyof typeof counts]}+` : stat.number.includes("%") ? `${counts[i as keyof typeof counts]}%` : stat.number}
+                {stat.number.includes("+") ? `${counts[i as keyof typeof counts] || 0}+` : stat.number === "100%" ? `${counts[1] || 0}%` : stat.number}
               </span>
               <span className="text-sm text-gray-text mt-1 block">{stat.label}</span>
             </motion.div>
@@ -658,8 +657,17 @@ function Contact() {
           </a>
         </div>
 
-        <div className="mt-10 mx-auto max-w-xl h-48 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white/40 text-sm">
-          Google Maps Placeholder
+        <div className="mt-10 mx-auto max-w-xl h-48 rounded-2xl overflow-hidden border border-white/20">
+          <iframe
+            src="https://www.google.com/maps?q=21/203+Eenthum+Kandi+Mathara+Kozhikode+673014&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Vrithy Solutions Location"
+          />
         </div>
       </div>
     </section>
