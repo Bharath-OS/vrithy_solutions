@@ -425,7 +425,7 @@ function Process() {
 
   return (
     <section id="process" ref={ref} className="relative py-28 px-6 bg-bg-light">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-3xl">
         <div className="text-center mb-16">
           <span className="text-xs font-semibold tracking-[0.2em] text-fresh uppercase">
             Our Cleaning Process
@@ -438,31 +438,29 @@ function Process() {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="hidden lg:block absolute left-[22px] top-0 bottom-0 w-0.5 bg-border-light" />
-
-          <div className="space-y-10 lg:space-y-0 relative">
-            {PROCESS_STEPS.map((step, i) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="lg:flex items-start gap-8 relative"
-              >
-                <div className="flex items-center gap-4 lg:w-48 shrink-0">
-                  <div className="w-11 h-11 rounded-full gradient-fresh flex items-center justify-center text-white font-number font-bold text-sm shrink-0 relative z-10">
-                    {step.step}
-                  </div>
-                  <h3 className="font-bold text-dark-text text-base lg:hidden">{step.title}</h3>
+        <div className="relative space-y-0">
+          {PROCESS_STEPS.map((step, i) => (
+            <motion.div
+              key={step.step}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex items-start gap-5 pb-8 last:pb-0"
+            >
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full gradient-fresh flex items-center justify-center text-white font-number font-bold text-sm shrink-0 relative z-10">
+                  {step.step}
                 </div>
-                <div className="lg:flex-1 lg:pt-2.5">
-                  <h3 className="hidden lg:block font-bold text-dark-text text-lg">{step.title}</h3>
-                  <p className="mt-1 text-sm text-gray-text leading-relaxed">{step.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                {i < PROCESS_STEPS.length - 1 && (
+                  <div className="w-0.5 flex-1 bg-border-light mt-1" />
+                )}
+              </div>
+              <div className="pt-1.5">
+                <h3 className="font-bold text-dark-text">{step.title}</h3>
+                <p className="mt-1 text-sm text-gray-text leading-relaxed">{step.desc}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
