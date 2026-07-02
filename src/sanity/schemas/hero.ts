@@ -16,5 +16,11 @@ export default {
       initialValue:
         "Professional cleaning services in Kozhikode. We bring the equipment, you bring the trust.",
     },
+    {
+      name: "image",
+      title: "Background Image",
+      type: "image",
+      description: "Upload the hero background image (recommended: 1920x1080)",
+    },
   ],
 };

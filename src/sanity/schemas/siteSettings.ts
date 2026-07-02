@@ -9,11 +9,5 @@ export default {
       type: "string",
       initialValue: "100% Satisfaction + 100% Vrithy",
     },
-    {
-      name: "heroBackground",
-      title: "Hero Background Image",
-      type: "image",
-      description: "Upload or change the hero background image",
-    },
   ],
 };

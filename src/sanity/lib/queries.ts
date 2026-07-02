@@ -1,4 +1,4 @@
-export const heroQuery = `*[_type == "hero"][0] { headline, subtitle }`;
+export const heroQuery = `*[_type == "hero"][0] { headline, subtitle, "imageUrl": image.asset->url }`;
 
 export const differenceQuery = `*[_type == "difference"][0] { headline, body }`;
 
@@ -17,7 +17,7 @@ export const contactQuery = `*[_type == "contact"][0] { address, phone, phoneLin
 export const siteSettingsQuery = `*[_type == "siteSettings"][0] { tagline }`;
 
 export const allDataQuery = `{
-  "hero": *[_type == "hero"][0] { headline, subtitle },
+  "hero": *[_type == "hero"][0] { headline, subtitle, "imageUrl": image.asset->url },
   "difference": *[_type == "difference"][0] { headline, body },
   "services": *[_type == "service"] | order(order asc) { title, description },
   "whyChoose": *[_type == "whyChoose"] | order(order asc) { title, description },

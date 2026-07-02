@@ -69,7 +69,7 @@ const OFFER_ICONS = [
 ];
 
 interface SanityData {
-  hero?: { headline?: string; subtitle?: string };
+  hero?: { headline?: string; subtitle?: string; imageUrl?: string };
   difference?: { headline?: string; body?: string };
   services?: { title: string; description: string }[];
   whyChoose?: { title: string; description: string }[];
@@ -90,7 +90,7 @@ function useSanityData() {
   useEffect(() => {
     client.fetch(allDataQuery)
       .then((result) => setData(result as SanityData))
-      .catch(() => {});
+      .catch((err) => console.error("Sanity fetch error:", err));
   }, []);
 
   return data;
@@ -197,14 +197,15 @@ function Navbar() {
 interface HeroProps {
   headline?: string;
   subtitle?: string;
+  imageUrl?: string;
 }
 
-function Hero({ headline = "Transform Your Space,<br />Not Your Schedule.", subtitle = "Professional deep cleaning for homes, apartments, offices and commercial spaces across Kozhikode. We bring the people, equipment and attention to detail so you simply enjoy the results." }: HeroProps) {
+function Hero({ headline = "Transform Your Space,<br />Not Your Schedule.", subtitle = "Professional deep cleaning for homes, apartments, offices and commercial spaces across Kozhikode. We bring the people, equipment and attention to detail so you simply enjoy the results.", imageUrl }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-bg.png')" }}
+        style={{ backgroundImage: `url('${imageUrl || "/hero-bg.png"}')` }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
 
@@ -845,7 +846,7 @@ export default function Home() {
       <WhatsAppCTA visible={waVisible} />
 
       <Navbar />
-      <Hero headline={heroData.headline} subtitle={heroData.subtitle} />
+      <Hero headline={heroData.headline} subtitle={heroData.subtitle} imageUrl={heroData.imageUrl} />
       <VrithyDifference headline={differenceData.headline} body={differenceData.body} />
       <Services services={services} />
       <WhyChoose reasons={whyChoose} />
